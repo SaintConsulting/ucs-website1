@@ -508,6 +508,9 @@
              Field names (entry.N) come from that form. If a question is edited in Google Forms, re-check its ID.
              Radio values must match the Google Form's option text exactly. -->
         <form id="quote-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdpSa2aGKTRSybBDp3UG1MBOt3BsbGJJ1DQNCNykqY2st59xQ/formResponse" method="POST" target="gform-sink" novalidate>
+          <!-- Google's own form sends these with every submission -->
+          <input type="hidden" name="fvv" value="1">
+          <input type="hidden" name="pageHistory" value="0">
           <div class="field">
             <label for="q-name">First &amp; last name <span class="req" aria-hidden="true">*</span></label>
             <input id="q-name" name="entry.765487275" autocomplete="name" required>
@@ -515,6 +518,10 @@
           <div class="field">
             <label for="q-phone">Phone <span class="req" aria-hidden="true">*</span></label>
             <input id="q-phone" name="entry.1772975875" type="tel" autocomplete="tel" required>
+          </div>
+          <div class="field full">
+            <label for="q-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input id="q-email" name="entry.220455606" type="email" autocomplete="email" required>
           </div>
           <div class="field full">
             <label for="q-address">Project address or zip code <span class="req" aria-hidden="true">*</span></label>
@@ -557,7 +564,7 @@
           </div>
           <p class="form-error" id="form-error" role="alert" hidden></p>
           <button type="submit" class="btn">Request My Free Quote</button>
-          <p class="form-note">By submitting, you agree that United Craftsman Services may call or text you at the number provided about your request. Consent to texts is not a condition of any purchase. Message frequency varies; message and data rates may apply. Reply STOP to opt out or HELP for help. See our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html#sms">Terms of Service</a>.</p>
+          <p class="form-note">By submitting, you agree that United Craftsman Services may call, text or email you about your request using the contact details provided. Consent to texts is not a condition of any purchase. Message frequency varies; message and data rates may apply. Reply STOP to opt out or HELP for help. See our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html#sms">Terms of Service</a>.</p>
           <p class="form-note">Having trouble? <a href="https://forms.gle/1xh39ZtrPefQjmT17" target="_blank" rel="noopener">Open the quote form on Google Forms</a> or call 740-953-3268.</p>
         </form>
         <div class="form-done" id="form-done" hidden tabindex="-1">
@@ -712,9 +719,11 @@
     function picked(name) { return !!form.querySelector('input[name="' + name + '"]:checked'); }
     const name = document.getElementById('q-name');
     const phone = document.getElementById('q-phone');
+    const email = document.getElementById('q-email');
     const addr = document.getElementById('q-address');
     check(name.value.trim() !== '', name, 'your name');
     check(phone.value.replace(/\D/g, '').length >= 10, phone, 'a phone number with area code');
+    check(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()), email, 'a valid email address');
     check(addr.value.trim() !== '', addr, 'the project address or zip code');
     check(picked('entry.1782140299'), document.getElementById('q-budget'), 'an investment range');
     check(picked('entry.635897677'), document.getElementById('q-timeline'), 'when you want to start');
