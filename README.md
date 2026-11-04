@@ -15,7 +15,7 @@ The notes inside `content.js` show exactly where each piece goes. The testimonia
 
 1. **Prepare the photo.** Name it simply, with no spaces, like `dublin-deck-2027.jpg`. Make sure it doesn't show house numbers, faces, license plates or street signs. Photos around 1600 pixels wide load fastest.
 2. **Upload it.** Click the **images** folder, then **Add file** > **Upload files**. Drag the photo in and click **Commit changes**.
-3. **Put it on the site.** Go back, open **content.js**, click the pencil, and copy one line from the `gallery` list. Paste it at the top of the list, so the newest photo comes first, and fill in:
+3. **Put it on the site.** Go back, open **content.js**, click the pencil, and find the right section under `projects` (Concrete & Stone, Fences or Decks & Builds). Use the `gallery` list instead for the short homepage gallery. Copy one line from that list. Paste it at the top of the list, so the newest photo comes first, and fill in:
    - `file`: the photo's file name
    - `alt`: what the photo shows, for people using screen readers (required)
    - `caption`: the short label shown on the photo
@@ -35,6 +35,7 @@ The most common mistake is a missing comma or backtick in `content.js`. If a sec
 |---|---|
 | `index.html` | The homepage |
 | `reviews.html` | The Reviews page. Reviews come from `content.js`. |
+| `projects.html` | The Projects page (Concrete & Stone, Fences, Decks & Builds). Photos are listed under `projects` in `content.js`. |
 | `content.js` | About text, testimonials and project photo list. **Edit this one.** |
 | `images/` | Logo and project photos |
 | `privacy.html`, `terms.html`, `accessibility.html` | Legal pages |

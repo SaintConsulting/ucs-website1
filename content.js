@@ -100,4 +100,63 @@ window.UCS_CONTENT = {
     { file: `cedar-fence.jpg`,            alt: `Horizontal cedar privacy fence in a backyard`,                                 caption: `Horizontal cedar privacy fence` },
   ],
 
+  /* ---------------- PROJECTS PAGE (projects.html) ----------------
+     The list above is the short gallery on the homepage. This one is the
+     full Projects page, split into sections.
+
+     To add a photo: upload it to the "images" folder, then paste a line at
+     the TOP of the right section's "photos" list (newest first). Same
+     rules as above: file name, a plain description (alt) and a caption.
+     .jpg, .png, .webp and .avif photos all work.
+
+     To add a whole new section, copy one section block, from { to },
+     including its comma.
+  */
+  projects: [
+    {
+      id: `concrete`,
+      title: `Concrete & Stone`,
+      intro: `Stamped concrete patios and walkways in custom patterns, borders and colors, plus fire-pit patios and natural stone.`,
+      photos: [
+        { file: `fire-pit-patio-seat-wall.jpg`,  alt: `Flagstone-stamped concrete patio with a round stone fire pit and curved seat wall`, caption: `Fire-pit patio with stone seat wall` },
+        { file: `stamped-concrete-walkway.jpg`,  alt: `Slate-textured stamped concrete walkway with a darker border leading to front steps`, caption: `Stamped walkway with contrast border` },
+        { file: `natural-stone-patio.jpg`,       alt: `Natural limestone flagstone patio laid in an irregular pattern in a shaded backyard`, caption: `Natural stone patio` },
+        { file: `circle-patio.jpg`,               alt: `Circular flagstone-stamped concrete patio with chiseled border`,                     caption: `Stamped patio with circular seating area` },
+        { file: `flagstone-patio-curves.jpg`,     alt: `Curving gray flagstone-stamped patio wrapping a brick home`,                          caption: `Flagstone-stamped patio with curved edges` },
+        { file: `patio-sunroom.jpg`,              alt: `Oval ashlar-pattern stamped concrete patio beside a sunroom`,                         caption: `Ashlar-pattern stamped patio` },
+        { file: `front-porch-patio.jpg`,          alt: `Stamped concrete front patio with a rounded border leading to a covered porch`,       caption: `Front entry patio with rounded border` },
+        { file: `stamped-ashlar-patio.jpg`,       alt: `Close-up of ashlar-pattern stamped concrete with curved chiseled border`,             caption: `Ashlar stamp with chiseled border` },
+        { file: `stamped-walkway.jpg`,            alt: `Stamped concrete walkway with wood-grain stamped borders`,                            caption: `Stamped walkway with wood-grain border` },
+      ],
+    },
+    {
+      id: `fences`,
+      title: `Fences`,
+      intro: `Privacy fences in wood, cedar and composite, built straight, level and solid.`,
+      photos: [
+        { file: `composite-fence-stamped-patio.avif`, alt: `Brown composite privacy fence around a gray stamped concrete patio with stone steps`, caption: `Composite privacy fence & stamped patio` },
+        { file: `wood-privacy-fence-gate.jpg`,       alt: `New pressure-treated wood privacy fence with an arched gate beside a house`,          caption: `Wood privacy fence with arched gate` },
+        { file: `cedar-fence.jpg`,                    alt: `Horizontal cedar privacy fence in a backyard`,                                         caption: `Horizontal cedar privacy fence` },
+      ],
+    },
+    {
+      id: `builds`,
+      title: `Decks & Builds`,
+      intro: `Composite and wood decks, pavilions, pergolas, railings and custom backyard builds like playsets.`,
+      photos: [
+        { file: `elevated-deck-stairs.jpg`,         alt: `Second-story composite deck with black railings and stairs down to a paver patio`, caption: `Elevated deck with stairs to paver patio` },
+        { file: `deck-stairs-paver-patio.jpg`,      alt: `Composite deck stairs with black railings and riser lights over a paver patio`,     caption: `Deck stairs with riser lights` },
+        { file: `composite-deck-black-railing.jpg`, alt: `Tan composite deck with black aluminum railings`,                                    caption: `Composite deck with black railing` },
+        { file: `deck-pergola.jpg`,                  alt: `Composite deck under a black louvered pergola with cedar privacy fence`,             caption: `Composite deck with louvered pergola` },
+        { file: `deck-planters.jpg`,                 alt: `Composite deck with built-in cedar planters and horizontal privacy fence`,           caption: `Deck with cedar planters & privacy screen` },
+        { file: `cedar-deck-skirting.jpg`,          alt: `Cedar deck with cedar railings, steps and skirting with an access door`,             caption: `Cedar deck with skirting` },
+        { file: `elevated-deck-brown-railing.jpg`,  alt: `Elevated brown deck with railings and stairs behind a two-story home`,               caption: `Elevated deck with stairs` },
+        { file: `pavilion-stamped-patio.jpg`,       alt: `White pavilion over a tan stamped concrete patio behind a brown house`,               caption: `Pavilion over stamped patio` },
+        { file: `patio-pavilion.jpg`,                alt: `Red stamped concrete patio beside a timber-framed pavilion behind a red house`,      caption: `Timber pavilion with stamped patio` },
+        { file: `porch-vinyl-railing.jpg`,          alt: `White vinyl railing with black balusters around a front porch`,                      caption: `Front porch railing` },
+        { file: `backyard-playground.jpg`,          alt: `Custom wooden backyard playset with slides, swings, rings and a climbing wall`,      caption: `Custom backyard playset` },
+      ],
+    },
+  ],
+
 };
