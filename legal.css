@@ -38,31 +38,32 @@ header { background: var(--surface); border-bottom: 1px solid var(--line); }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand img { width: 52px; height: 52px; object-fit: contain; }
 .brand span {
-  font-family: "Barlow Condensed", sans-serif; font-weight: 800; text-transform: uppercase;
-  font-size: 21px; line-height: 1; color: var(--navy);
+  font-family: Archivo, Inter, sans-serif; font-stretch: 118%; font-weight: 700; text-transform: uppercase;
+  font-size: 17px; line-height: 1; letter-spacing: .03em; color: var(--navy);
 }
 .btn {
-  display: inline-flex; align-items: center; padding: 12px 20px; border-radius: 999px;
-  background: var(--gold); color: var(--navy-deep); font-weight: 600; font-size: 15px; text-decoration: none;
+  display: inline-flex; align-items: center; padding: 13px 20px; border-radius: 2px;
+  background: var(--gold); color: var(--navy-deep); font-weight: 700; font-size: 12px; line-height: 1;
+  letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
 }
 .btn:hover { background: var(--gold-hover); }
 
 main { padding: 64px 0 96px; }
 article { max-width: 720px; }
-.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-ink); }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-ink); }
 h1, h2 {
-  font-family: "Barlow Condensed", Inter, sans-serif; font-weight: 800; text-transform: uppercase;
-  color: var(--navy); line-height: 1.05; text-wrap: balance;
+  font-family: Archivo, Inter, sans-serif; font-stretch: 118%; font-weight: 700; text-transform: uppercase;
+  color: var(--navy); line-height: 1.08; letter-spacing: .01em; text-wrap: balance;
 }
-h1 { font-size: clamp(40px, 6vw, 60px); margin: 10px 0 8px; }
-h2 { font-size: 28px; margin: 44px 0 10px; }
+h1 { font-size: clamp(32px, 5vw, 52px); margin: 10px 0 8px; }
+h2 { font-size: 24px; margin: 44px 0 10px; }
 .updated { color: var(--muted); margin: 0 0 32px; }
 p, li { color: #2c3540; }
 ul { padding-left: 22px; }
 li { margin-bottom: 6px; }
 .contact-card {
   margin-top: 16px; padding: 20px 24px; background: var(--surface);
-  border: 1px solid var(--line); border-radius: 14px;
+  border: 1px solid var(--line); border-radius: 2px;
 }
 .contact-card p { margin: 0 0 4px; }
 

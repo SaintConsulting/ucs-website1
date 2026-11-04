@@ -79,7 +79,7 @@
     '.ucs-consent{position:fixed;z-index:70;left:calc(16px + env(safe-area-inset-left,0px));right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));',
     'max-width:560px;margin:0 auto;background:#12233a;color:#fff;border-radius:16px;padding:20px 22px;',
     'box-shadow:0 18px 50px rgba(0,0,0,.35);font:15px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}',
-    '.ucs-consent h2{font:800 20px/1.1 "Barlow Condensed",Inter,sans-serif;text-transform:uppercase;margin:0 0 6px;color:#fff}',
+    '.ucs-consent h2{font:700 18px/1.1 Archivo,Inter,sans-serif;font-stretch:118%;text-transform:uppercase;margin:0 0 6px;color:#fff}',
     '.ucs-consent p{margin:0 0 16px;color:rgba(255,255,255,.85)}',
     '.ucs-consent a{color:#fff}',
     '.ucs-consent .row{display:flex;flex-wrap:wrap;gap:10px}',
