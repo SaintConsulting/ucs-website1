@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reviews | United Craftsman Services</title>
+  <meta name="description" content="Reviews and testimonials from United Craftsman Services clients in Dublin, Westerville, Powell, Worthington and the Columbus area.">
+  <link rel="icon" href="images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="legal.css">
+  <style>
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a:not(.btn) { text-decoration: none; font-weight: 500; color: var(--muted); font-size: 15px; }
+    .nav-links a:not(.btn):hover, .nav-links a[aria-current] { color: var(--navy); }
+    .nav-links a[aria-current] { font-weight: 600; }
+
+    .page-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: 44px; }
+    .page-head > div { max-width: 640px; }
+    .page-head p { margin: 0; color: var(--muted); font-size: 17px; }
+    .review-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn-outline { background: transparent; color: var(--navy); box-shadow: inset 0 0 0 1.5px var(--navy); }
+    .btn-outline:hover { background: var(--navy); color: #fff; }
+
+    .quotes { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .quote-card {
+      margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+      padding: 30px 28px; display: flex; flex-direction: column; gap: 16px;
+    }
+    .stars { color: var(--gold-ink); font-size: 18px; letter-spacing: 2px; line-height: 1; }
+    .quote-card blockquote { margin: 0; font-size: 17px; line-height: 1.6; color: var(--ink); }
+    .quote-card figcaption { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+    .quote-card figcaption strong { display: block; color: var(--navy); font-size: 15px; }
+
+    .empty {
+      max-width: 640px; padding: 36px 32px; background: var(--surface);
+      border: 1px solid var(--line); border-radius: 16px;
+    }
+    .empty h2 { margin-top: 0; }
+    .empty p { margin: 0 0 18px; }
+
+    .cta {
+      margin-top: 64px; padding: 40px 36px; border-radius: 20px; background: var(--navy); color: #fff;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;
+    }
+    .cta h2 { color: #fff; margin: 0 0 6px; }
+    .cta p { color: rgba(255,255,255,.8); margin: 0; }
+
+    @media (max-width: 720px) {
+      .nav-links a:not(.btn) { display: none; }
+      .quotes { grid-template-columns: 1fr; }
+      .cta { padding: 32px 22px; }
+    }
+  </style>
+  <script src="site.js" defer></script>
+</head>
+<body>
+<a href="#main" class="skip">Skip to main content</a>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand" aria-label="United Craftsman Services home">
+      <img src="images/logo.png" alt="">
+      <span>United Craftsman Services</span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="index.html#services">Services</a>
+      <a href="index.html#work">Our Work</a>
+      <a href="index.html#about">About</a>
+      <a href="reviews.html" aria-current="page">Reviews</a>
+      <a href="index.html#quote" class="btn">Get a Quote</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="page-head">
+      <div>
+        <div class="eyebrow">Client stories</div>
+        <h1>Reviews &amp; Testimonials</h1>
+        <p>What homeowners in Dublin, Westerville, Powell, Worthington and the surrounding areas say about working with United Craftsman Services.</p>
+      </div>
+      <div class="review-actions" id="review-actions"></div>
+    </div>
+
+    <!-- Reviews come from the "testimonials" list in content.js -->
+    <div class="quotes" id="review-list"></div>
+
+    <div class="empty" id="review-empty" hidden>
+      <h2>Reviews coming soon</h2>
+      <p>We're collecting reviews from recent projects. If we've worked on your home, we'd love to hear how it went.</p>
+      <p>Call <a href="tel:+17409533268">740-953-3268</a> or email <a href="mailto:SeanPHundo@gmail.com?subject=My%20UCS%20review">SeanPHundo@gmail.com</a>.</p>
+    </div>
+
+    <div class="cta">
+      <div>
+        <h2>Ready to start your project?</h2>
+        <p>Free design consultations and estimates.</p>
+      </div>
+      <a href="index.html#quote" class="btn">Get a Free Quote</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 United Craftsman Services, LLC · Insured</span>
+    <span><a href="reviews.html" aria-current="page">Reviews</a> · <a href="privacy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a> · <a href="accessibility.html">Accessibility</a><span data-cookie-settings hidden> · <a href="#">Cookie settings</a></span></span>
+  </div>
+</footer>
+
+<script src="content.js"></script>
+<script>
+  // Fill the page from content.js. Everything is inserted as plain text.
+  (function () {
+    const c = window.UCS_CONTENT || {};
+    function el(tag, cls, text) {
+      const n = document.createElement(tag);
+      if (cls) n.className = cls;
+      if (text != null) n.textContent = text;
+      return n;
+    }
+
+    const links = c.reviewLinks || {};
+    const actions = document.getElementById('review-actions');
+    [['google', 'Review us on Google'], ['facebook', 'Review us on Facebook']].forEach(function (pair) {
+      const url = (links[pair[0]] || '').trim();
+      if (!/^https:\/\//.test(url)) return;
+      const a = el('a', 'btn btn-outline', pair[1]);
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      actions.appendChild(a);
+    });
+
+    const reviews = (c.testimonials || []).filter(function (t) { return t && t.quote; });
+    const list = document.getElementById('review-list');
+    reviews.forEach(function (t) {
+      const fig = el('figure', 'quote-card');
+      const n = Math.round(Number(t.stars));
+      if (n >= 1 && n <= 5) {
+        const s = el('div', 'stars', '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n));
+        s.setAttribute('role', 'img');
+        s.setAttribute('aria-label', n + ' out of 5 stars');
+        fig.appendChild(s);
+      }
+      fig.appendChild(el('blockquote', null, t.quote));
+      const cap = el('figcaption');
+      cap.appendChild(el('strong', null, t.name || 'UCS client'));
+      const details = [t.project, t.location].filter(Boolean).join(' · ');
+      cap.appendChild(document.createTextNode(details + (t.source ? (details ? ' · ' : '') + 'via ' + t.source : '')));
+      fig.appendChild(cap);
+      list.appendChild(fig);
+    });
+    document.getElementById('review-empty').hidden = reviews.length > 0;
+  })();
+</script>
+</body>
+</html>
