@@ -1,23 +1,30 @@
-/* Shared by every page: cookie consent, analytics (Google Analytics 4 + Microsoft Clarity)
-   and conversion tracking.
+/* Shared by every page: cookie consent, analytics (Google Analytics 4 + Microsoft Clarity),
+   Google Ads and conversion tracking.
 
-   Analytics scripts load only after the visitor clicks "Accept". Until at least one ID below
+   These tools load only after the visitor clicks "Accept". Until at least one ID below
    is filled in, no banner shows and nothing loads. Visitors whose browser sends a Global
-   Privacy Control signal are treated as having declined.
+   Privacy Control signal are treated as having declined, which also opts them out of ad tracking.
 
    Conversions sent (mark these as key events in GA4 > Admin > Events):
      generate_lead  - quote form submitted (sent from index.html)
      click_to_call  - any tel: link clicked
      click_email    - any mailto: link clicked
+
+   Google Ads conversions: either import the generate_lead key event from GA4 into Google Ads
+   (no code change), or fill in adsId and adsLeadLabel from Google Ads > Goals > Conversions.
+   Never send names, phone numbers, emails or form answers to these tools; the Privacy Policy
+   promises that.
 */
 (function () {
   var CONFIG = {
     ga4Id: 'G-JWR1WPENHV', // GA4 property "United Craftsman Services"
-    clarityId: ''   // TODO: Microsoft Clarity project ID, e.g. 'k8x2abc9de'
+    adsId: '',             // Google Ads tag ID, e.g. 'AW-123456789'
+    adsLeadLabel: '',      // Google Ads conversion label for quote requests, e.g. 'AbCdEfGhIjK1lMnO'
+    clarityId: ''          // Microsoft Clarity project ID, e.g. 'k8x2abc9de'
   };
 
   var KEY = 'ucs-consent'; // 'granted' | 'denied', kept in this browser only
-  var enabled = !!(CONFIG.ga4Id || CONFIG.clarityId);
+  var enabled = !!(CONFIG.ga4Id || CONFIG.adsId || CONFIG.clarityId);
   var gpc = navigator.globalPrivacyControl === true;
   var loaded = false;
   var banner = null;
@@ -28,15 +35,24 @@
   function loadAnalytics() {
     if (loaded || !enabled) return;
     loaded = true;
-    if (CONFIG.ga4Id) {
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(CONFIG.ga4Id);
-      document.head.appendChild(s);
+    var googleId = CONFIG.ga4Id || CONFIG.adsId;
+    if (googleId) {
       window.dataLayer = window.dataLayer || [];
       window.gtag = function () { window.dataLayer.push(arguments); };
+      // Google Consent Mode. This only runs after the visitor accepts, so every signal is granted.
+      window.gtag('consent', 'default', {
+        analytics_storage: 'granted',
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted'
+      });
       window.gtag('js', new Date());
-      window.gtag('config', CONFIG.ga4Id);
+      if (CONFIG.ga4Id) window.gtag('config', CONFIG.ga4Id);
+      if (CONFIG.adsId) window.gtag('config', CONFIG.adsId);
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(googleId);
+      document.head.appendChild(s);
     }
     if (CONFIG.clarityId) {
       (function (c, l, a, r, i, t, y) {
@@ -48,12 +64,12 @@
     }
   }
 
-  // Remove analytics cookies after a visitor withdraws consent.
+  // Remove analytics and ad cookies after a visitor withdraws consent.
   function clearAnalyticsCookies() {
     var host = location.hostname.replace(/^www\./, '');
     document.cookie.split(';').forEach(function (c) {
       var name = c.split('=')[0].trim();
-      if (/^(_ga|_gid|_clck|_clsk|CLID|MUID)/.test(name)) {
+      if (/^(_ga|_gid|_gcl|_clck|_clsk|CLID|MUID)/.test(name)) {
         ['', '; domain=' + host, '; domain=.' + host].forEach(function (d) {
           document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + d;
         });
@@ -64,7 +80,10 @@
   // Public hook for page scripts: window.ucsTrack('generate_lead', { ... })
   window.ucsTrack = function (name, params) {
     if (!loaded) return;
-    if (CONFIG.ga4Id && window.gtag) window.gtag('event', name, params || {});
+    if (window.gtag) window.gtag('event', name, params || {});
+    if (name === 'generate_lead' && CONFIG.adsId && CONFIG.adsLeadLabel && window.gtag) {
+      window.gtag('event', 'conversion', { send_to: CONFIG.adsId + '/' + CONFIG.adsLeadLabel });
+    }
     if (CONFIG.clarityId && window.clarity) window.clarity('event', name);
   };
 
@@ -98,10 +117,11 @@
     banner = document.createElement('section');
     banner.className = 'ucs-consent';
     banner.setAttribute('aria-labelledby', 'ucs-consent-title');
-    var tools = [CONFIG.ga4Id && 'Google Analytics', CONFIG.clarityId && 'Microsoft Clarity'].filter(Boolean).join(' and ');
+    var tools = [CONFIG.ga4Id && 'Google Analytics', CONFIG.clarityId && 'Microsoft Clarity', 'Google advertising cookies'].filter(Boolean);
     banner.innerHTML =
       '<h2 id="ucs-consent-title">Cookies on this site</h2>' +
-      '<p>With your permission, we use ' + tools + ' to see how people use this site so we can improve it. ' +
+      '<p>With your permission, we use ' + tools.slice(0, -1).join(', ') + (tools.length > 1 ? ' and ' : '') + tools[tools.length - 1] +
+      ' to see how people use this site, measure how well our ads work, and show our ads to people who have visited. ' +
       'They stay off unless you accept. <a href="privacy.html#analytics">Learn more</a></p>' +
       '<div class="row"><button type="button" class="decline">Decline</button>' +
       '<button type="button" class="accept">Accept</button></div>';
