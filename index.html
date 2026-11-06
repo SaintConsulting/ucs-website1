@@ -1232,6 +1232,38 @@
   const sink = document.getElementById('gform-sink');
   let submitted = false;
 
+  // Each request also goes to GoHighLevel through the Vercel function in api/ghl-lead.js.
+  // It runs alongside the Google Form post and never blocks or changes it.
+  // Pages served by Vercel call their own /api route; the GitHub Pages copy calls the Vercel address.
+  const GHL_ENDPOINT = location.hostname.endsWith('github.io')
+    ? 'https://ucs-website1.vercel.app/api/ghl-lead'
+    : '/api/ghl-lead';
+  function sendToGhl() {
+    function val(id) { return document.getElementById(id).value.trim(); }
+    function picked(name) { return (form.querySelector('input[name="' + name + '"]:checked') || {}).value || ''; }
+    const lead = {
+      name: val('q-name'),
+      phone: val('q-phone'),
+      email: val('q-email'),
+      address: val('q-address'),
+      project: val('q-project'),
+      budget: picked('entry.1782140299'),
+      timeline: picked('entry.635897677'),
+      foundUs: picked('entry.1422920333'),
+      extra: val('q-extra')
+    };
+    try {
+      // Sent as text/plain so the browser skips the CORS preflight; the function parses the JSON.
+      fetch(GHL_ENDPOINT, {
+        method: 'POST',
+        mode: 'cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: JSON.stringify(lead)
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
   form.addEventListener('submit', function (e) {
     const missing = [];
     let firstBad = null;
@@ -1260,6 +1292,7 @@
       return;
     }
     err.hidden = true;
+    sendToGhl();
     submitted = true;
     form.querySelector('button[type="submit"]').disabled = true;
   });

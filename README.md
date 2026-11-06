@@ -41,7 +41,8 @@ The most common mistake is a missing comma or backtick in `content.js`. If a sec
 | `privacy.html`, `terms.html`, `accessibility.html` | Legal pages |
 | `site.js` | Cookie banner and Google Analytics. Add the measurement ID here once you have it. |
 | `legal.css` | Styling for the legal pages |
+| `api/ghl-lead.js` | Runs on Vercel. Sends a copy of each quote request to GoHighLevel (contact + opportunity in "Sean's Leads" > "New Lead"). Uses the `GHL_API_TOKEN` and `GHL_LOCATION_ID` settings in Vercel; never put the token in this file. |
 
 ## Quote form
 
-Quote requests go to the UCS Google Form and appear in Google Forms and Sheets. If you change questions or answer choices in the Google Form, the website form needs a matching update, or those answers won't come through.
+Quote requests go to the UCS Google Form and appear in Google Forms and Sheets. A copy also goes to GoHighLevel through `api/ghl-lead.js` on Vercel; if that copy fails, the Google Form still gets the request. If you change questions or answer choices in the Google Form, the website form needs a matching update, or those answers won't come through.
