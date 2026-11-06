@@ -901,8 +901,8 @@
             <input id="q-email" name="entry.220455606" type="email" autocomplete="email" required>
           </div>
           <div class="field full">
-            <label for="q-address">Project address or zip code <span class="req" aria-hidden="true">*</span></label>
-            <input id="q-address" name="entry.573555482" autocomplete="street-address" required>
+            <label for="q-address">Project address &amp; zip code <span class="req" aria-hidden="true">*</span></label>
+            <input id="q-address" name="entry.573555482" autocomplete="street-address" placeholder="Street address, city and zip" required>
           </div>
           <div class="field full">
             <label for="q-project">Tell us about your project</label>
@@ -942,7 +942,7 @@
           <p class="form-error" id="form-error" role="alert" hidden></p>
           <button type="submit" class="btn">Request My Free Quote</button>
           <p class="form-note">By submitting, you agree that United Craftsman Services may call, text or email you about your request using the contact details provided. Consent to texts is not a condition of any purchase. Message frequency varies; message and data rates may apply. Reply STOP to opt out or HELP for help. See our <a href="privacy.html">Privacy Policy</a> and <a href="terms.html#sms">Terms of Service</a>.</p>
-          <p class="form-note">Having trouble? <a href="https://forms.gle/1xh39ZtrPefQjmT17" target="_blank" rel="noopener">Open the quote form on Google Forms</a> or call 740-953-3268.</p>
+          <p class="form-note">Having trouble? <a href="https://forms.gle/m5pQG25VTLtiMMTM7" target="_blank" rel="noopener">Open the quote form on Google Forms</a> or call 740-953-3268.</p>
         </form>
         <div class="form-done" id="form-done" hidden tabindex="-1">
           <h3>Thanks for reaching out!</h3>
@@ -1247,7 +1247,7 @@
     check(name.value.trim() !== '', name, 'your name');
     check(phone.value.replace(/\D/g, '').length >= 10, phone, 'a phone number with area code');
     check(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim()), email, 'a valid email address');
-    check(addr.value.trim() !== '', addr, 'the project address or zip code');
+    check(addr.value.trim() !== '', addr, 'the project address and zip code');
     check(picked('entry.1782140299'), document.getElementById('q-budget'), 'an investment range');
     check(picked('entry.635897677'), document.getElementById('q-timeline'), 'when you want to start');
     check(picked('entry.1422920333'), document.getElementById('q-source'), 'how you found us');
