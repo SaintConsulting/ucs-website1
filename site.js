@@ -12,7 +12,7 @@
 */
 (function () {
   var CONFIG = {
-    ga4Id: '',      // TODO: GA4 measurement ID, e.g. 'G-ABC123XYZ'
+    ga4Id: 'G-JWR1WPENHV', // GA4 property "United Craftsman Services"
     clarityId: ''   // TODO: Microsoft Clarity project ID, e.g. 'k8x2abc9de'
   };
 
@@ -98,9 +98,10 @@
     banner = document.createElement('section');
     banner.className = 'ucs-consent';
     banner.setAttribute('aria-labelledby', 'ucs-consent-title');
+    var tools = [CONFIG.ga4Id && 'Google Analytics', CONFIG.clarityId && 'Microsoft Clarity'].filter(Boolean).join(' and ');
     banner.innerHTML =
       '<h2 id="ucs-consent-title">Cookies on this site</h2>' +
-      '<p>With your permission, we use Google Analytics and Microsoft Clarity to see how people use this site so we can improve it. ' +
+      '<p>With your permission, we use ' + tools + ' to see how people use this site so we can improve it. ' +
       'They stay off unless you accept. <a href="privacy.html#analytics">Learn more</a></p>' +
       '<div class="row"><button type="button" class="decline">Decline</button>' +
       '<button type="button" class="accept">Accept</button></div>';
