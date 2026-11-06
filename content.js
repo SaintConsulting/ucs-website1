@@ -69,7 +69,7 @@ window.UCS_CONTENT = {
                copy the link.
        Facebook: your page's address followed by /reviews  */
   reviewLinks: {
-    google: ``,
+    google: `https://g.page/r/Cfm_yqpCTFGjEBM/review`,
     facebook: ``,
   },
 
