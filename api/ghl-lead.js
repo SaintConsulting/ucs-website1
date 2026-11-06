@@ -172,14 +172,29 @@ async function findPipelineStage(token, locationId) {
 }
 
 function createOpportunity(token, locationId, contactId, stage, lead) {
-  return ghl(token, 'POST', '/opportunities/', {
+  const opportunity = {
     locationId,
     pipelineId: stage.pipelineId,
     pipelineStageId: stage.stageId,
     contactId,
     name: lead.name + ' - Website quote',
     status: 'open',
-  });
+  };
+  const value = budgetMidpoint(lead.budget);
+  if (value) opportunity.monetaryValue = value;
+  return ghl(token, 'POST', '/opportunities/', opportunity);
+}
+
+// Opportunity value: the midpoint of the budget range they picked,
+// e.g. "$10,000 - $35,000" -> 22500. "$100,000 - $250,000+" -> 175000.
+function budgetMidpoint(budget) {
+  const nums = (String(budget).match(/\d[\d,]*/g) || [])
+    .map((n) => Number(n.replace(/,/g, '')))
+    .filter((n) => n > 0);
+  if (!nums.length) return 0;
+  const low = nums[0];
+  const high = nums.length > 1 ? nums[1] : nums[0];
+  return Math.round((low + high) / 2);
 }
 
 // GoHighLevel expects phone numbers like +16145551234.
