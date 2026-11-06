@@ -6,6 +6,17 @@
   <title>United Craftsman Services</title>
   <meta name="description" content="United Craftsman Services: Columbus, Ohio general contractor since 2005. Custom decks, stamped concrete, natural stone, pergolas and home additions. Free design consultations and estimates.">
   <link rel="icon" href="images/logo.png">
+  <!-- Link preview (texts, Facebook, email). Image and URLs must be full addresses; update them if the site moves to its own domain. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="United Craftsman Services">
+  <meta property="og:title" content="United Craftsman Services | Columbus, Ohio">
+  <meta property="og:description" content="Custom decks, stamped concrete, natural stone, pergolas and home additions. Family-run since 2005. Free design consultations and estimates.">
+  <meta property="og:url" content="https://saintconsulting.github.io/ucs-website1/">
+  <meta property="og:image" content="https://saintconsulting.github.io/ucs-website1/images/share-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="United Craftsman Services logo over a stamped concrete patio: custom decks, stamped concrete, natural stone and pergolas in Columbus, Ohio">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112..125,500..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -1144,6 +1155,45 @@
       gallery.appendChild(fig);
     });
   })();
+
+  // Scroll without the smooth animation (used for page-load positioning).
+  function jumpTo(fn) {
+    const root = document.documentElement;
+    root.style.scrollBehavior = 'auto';
+    fn();
+    root.style.scrollBehavior = '';
+  }
+
+  // Visitors arriving from outside the site (a shared link, a text, a search result) start at the top,
+  // even if the link ends in a section like #work or #quote. Links from the site's own pages
+  // (e.g. "Get a Quote" on projects.html) still go to their section. Reload and Back keep the browser's spot.
+  (function () {
+    const nav = (performance.getEntriesByType && performance.getEntriesByType('navigation')[0]) || {};
+    if (nav.type && nav.type !== 'navigate') return;
+    let fromSite = false;
+    try { fromSite = !!document.referrer && new URL(document.referrer).origin === location.origin; } catch (e) {}
+    let target = null;
+    try { target = location.hash.length > 1 && document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (e) {}
+    const keep = fromSite && target;
+    if (location.hash && !keep) history.replaceState(null, '', location.pathname + location.search);
+
+    // Stop adjusting once the visitor starts scrolling on their own.
+    let touched = false;
+    ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (t) {
+      window.addEventListener(t, function () { touched = true; }, { once: true, passive: true });
+    });
+    function settle() {
+      if (touched) return;
+      jumpTo(function () { keep ? target.scrollIntoView() : window.scrollTo(0, 0); });
+    }
+    settle();
+    window.addEventListener('load', settle);
+  })();
+
+  // Keep the address bar clean when someone taps a menu link, so a copied link opens at the top.
+  window.addEventListener('hashchange', function () {
+    history.replaceState(null, '', location.pathname + location.search);
+  });
 
   // Gallery lightbox
   const lb = document.getElementById('lightbox');
