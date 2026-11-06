@@ -41,6 +41,7 @@
     }
 
     * { box-sizing: border-box; }
+    [hidden] { display: none !important; } /* so "hidden" wins over rules like form { display: grid } */
     html { scroll-behavior: smooth; scroll-padding-top: 124px; }
     body {
       margin: 0;
