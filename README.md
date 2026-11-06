@@ -1,6 +1,6 @@
 # United Craftsman Services website
 
-The website for United Craftsman Services, LLC. It's hosted free on GitHub Pages. Any change saved here goes live on the site in about a minute.
+The website for United Craftsman Services, LLC, at **https://unitedcraftsman.com** (domain registered at Squarespace, site hosted on Vercel). Vercel and GitHub Pages both publish straight from this repository, so any change saved here goes live in about a minute.
 
 ## Change the About Us text or add a testimonial
 

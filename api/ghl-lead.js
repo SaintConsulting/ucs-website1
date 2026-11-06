@@ -20,10 +20,10 @@ const LEAD_SOURCE = 'Website quote form';
 
 // Websites allowed to send leads here. Add the address here if the site moves to a new domain.
 const ALLOWED_ORIGINS = [
-  'https://saintconsulting.github.io',
+  'https://unitedcraftsman.com',
+  'https://www.unitedcraftsman.com',
   'https://ucs-website1.vercel.app',
-  'https://unitedcraftsmen.com',
-  'https://www.unitedcraftsmen.com',
+  'https://saintconsulting.github.io',
 ];
 
 module.exports = async function handler(req, res) {
