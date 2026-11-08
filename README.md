@@ -41,6 +41,7 @@ The most common mistake is a missing comma or backtick in `content.js`. If a sec
 | `privacy.html`, `terms.html`, `accessibility.html` | Legal pages |
 | `site.js` | Cookie banner and Google Analytics. Add the measurement ID here once you have it. |
 | `legal.css` | Styling for the legal pages |
+| `robots.txt`, `sitemap.xml` | Tell Google which pages to list. If you add a new page, add its address to `sitemap.xml`. |
 | `api/ghl-lead.js` | Runs on Vercel. Sends a copy of each quote request to GoHighLevel (contact + opportunity in "Sean's Leads" > "New Lead"). Uses the `GHL_API_TOKEN` and `GHL_LOCATION_ID` settings in Vercel; never put the token in this file. |
 
 ## Quote form
