@@ -105,11 +105,18 @@
     '.ucs-consent button{flex:1 1 140px;padding:12px 18px;border-radius:999px;font:600 15px/1 Inter,sans-serif;cursor:pointer;border:1.5px solid #f2b632}',
     '.ucs-consent .accept{background:#f2b632;color:#12233a}',
     '.ucs-consent .decline{background:transparent;color:#fff}',
-    '.ucs-consent button:focus-visible{outline:3px solid #fff;outline-offset:3px}'
+    '.ucs-consent button:focus-visible{outline:3px solid #fff;outline-offset:3px}',
+    // The GoHighLevel chat bubble sits on top of the banner's buttons on phones, so hide it until the visitor chooses.
+    'html.ucs-consent-open chat-widget{display:none!important}'
   ].join('');
 
+  function setBannerOpen(open) {
+    if (banner) banner.hidden = !open;
+    document.documentElement.classList.toggle('ucs-consent-open', open);
+  }
+
   function showBanner(focus) {
-    if (banner) { banner.hidden = false; if (focus) banner.querySelector('button').focus(); return; }
+    if (banner) { setBannerOpen(true); if (focus) banner.querySelector('button').focus(); return; }
     var style = document.createElement('style');
     style.textContent = css;
     document.head.appendChild(style);
@@ -132,7 +139,7 @@
       var choice = btn.classList.contains('accept') ? 'granted' : 'denied';
       var was = getChoice();
       setChoice(choice);
-      banner.hidden = true;
+      setBannerOpen(false);
       if (choice === 'granted') { loadAnalytics(); }
       else if (was === 'granted' || loaded) { clearAnalyticsCookies(); location.reload(); }
     });
@@ -141,6 +148,7 @@
     var skip = document.querySelector('.skip');
     if (skip) skip.insertAdjacentElement('afterend', banner);
     else document.body.insertBefore(banner, document.body.firstChild);
+    setBannerOpen(true);
     if (focus) banner.querySelector('button').focus();
   }
 
