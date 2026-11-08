@@ -4,7 +4,7 @@
    here, and this function:
      1. creates or updates the contact (name, phone, email, address) and adds a note with the
         rest of the form answers,
-     2. creates an opportunity for that contact in the "Sean's Leads" pipeline, "New Lead" stage.
+     2. creates an opportunity for that contact in the "Jobs" pipeline, "New Lead" stage.
    Pipeline and stage IDs are looked up through the API by name, so renaming either one in
    GoHighLevel means updating PIPELINE_NAME / STAGE_NAME below.
 
@@ -14,7 +14,7 @@
 
 const GHL_BASE = 'https://services.leadconnectorhq.com';
 const GHL_VERSION = '2021-07-28';
-const PIPELINE_NAME = "Sean's Leads";
+const PIPELINE_NAME = 'Jobs';
 const STAGE_NAME = 'New Lead';
 const LEAD_SOURCE = 'Website quote form';
 
@@ -164,9 +164,15 @@ async function findPipelineStage(token, locationId) {
   const norm = (s) => String(s || '').replace(/[‘’]/g, "'").replace(/\s+/g, ' ').trim().toLowerCase();
   const out = await ghl(token, 'GET', '/opportunities/pipelines?locationId=' + encodeURIComponent(locationId));
   const pipeline = (out.pipelines || []).find((p) => norm(p.name) === norm(PIPELINE_NAME));
-  if (!pipeline) throw new Error('Pipeline "' + PIPELINE_NAME + '" was not found');
+  if (!pipeline) {
+    const names = (out.pipelines || []).map((p) => '"' + p.name + '"').join(', ') || 'none';
+    throw new Error('Pipeline "' + PIPELINE_NAME + '" was not found. Pipelines in this account: ' + names);
+  }
   const stage = (pipeline.stages || []).find((s) => norm(s.name) === norm(STAGE_NAME));
-  if (!stage) throw new Error('Stage "' + STAGE_NAME + '" was not found in "' + PIPELINE_NAME + '"');
+  if (!stage) {
+    const names = (pipeline.stages || []).map((s) => '"' + s.name + '"').join(', ') || 'none';
+    throw new Error('Stage "' + STAGE_NAME + '" was not found in "' + PIPELINE_NAME + '". Stages: ' + names);
+  }
   cachedStage = { pipelineId: pipeline.id, stageId: stage.id };
   return cachedStage;
 }
